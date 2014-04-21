@@ -9,13 +9,15 @@ angular.module('mdoauthApp')
     ];
 
     $scope.registerUser = function(){
-      console.log($scope.user);
-      $scope.errors = {};
-      $http.post('http://127.0.0.1/v1/registration', $scope.user, {}
-      ).success(function(data, status, headers, config) {
-        // render success message or redirect
-      }).error(function(data, status, headers, config) {
-        $scope.errors.messages = data.join(', ');
-      });
+      //$http.post("http://54.187.121.231:3000/v1/registration", $scope.user, {}
+      //).success(function(data, status, headers, config) {
+        // render success message and redirect back
+      //}).error(function(data, status, headers, config) {
+        //  parse messages and add errors to form
+      //});
+    }
+
+    $scope.invalidField = function(field){
+      return (field.$dirty && field.$invalid)
     }
   });
