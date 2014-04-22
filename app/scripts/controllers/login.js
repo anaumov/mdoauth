@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('mdoauthApp')
-  .controller('RegistrationController', function ($scope, $http, invalidField) {
+  .controller('LoginController', function ($scope, $http, invalidField) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    $scope.registerUser = function(){
-      //$http.post("http://54.187.121.231:3000/v1/registration", $scope.user, {}
+    $scope.authUser = function(){
+      //$http.post("http://54.187.121.231:3000/v1/login", $scope.user, {}
       //).success(function(data, status, headers, config) {
-        // render success message and redirect back
+      // render success message and redirect back
       //}).error(function(data, status, headers, config) {
-        //  parse messages and add errors to form
+      //  parse messages and add errors to form
       //});
     }
 

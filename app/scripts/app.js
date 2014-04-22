@@ -1,13 +1,14 @@
 'use strict';
 
-angular
+var mdoauthApp = angular
   .module('mdoauthApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngRoute'
-  ])
-  .config(function ($routeProvider) {
+  ]);
+
+mdoauthApp.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -17,13 +18,21 @@ angular
         templateUrl: 'views/registration.html',
         controller: 'RegistrationController'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginController'
+      })
       .otherwise({
         redirectTo: '/'
       });
-  })
-  .config(['$httpProvider', function($httpProvider) {
+  });
+
+mdoauthApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }
 ]);
+
+mdoauthApp.factory('invalidField', [function(field){
+  return function(field){ return (field.$dirty && field.$invalid)};
+}]);
