@@ -1,48 +1,57 @@
 <h3>Registration form.</h3>
+
 <form ng-controller="RegistrationController" name="userForm">
   <p ng-model="user.errors.general"></p>
 
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.FirstName)}">
     <label>First name</label>
     <input class="form-control" type="text" ng-model="user.FirstName" name="FirstName" required/>
-    <p class="help-block" ng-show="invalidField(userForm.FirstName)">First Name is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.FirstName)">First Name is required</p>
+    <p class="text-danger" ng-bind="user.errors.FirstName"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.LastName)}">
     <label>Last name</label>
     <input class="form-control" type="text" ng-model="user.LastName" name="LastName" required/>
-    <p class="help-block" ng-show="invalidField(userForm.LastName)">Last Name is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.LastName)">Last Name is required</p>
+    <p class="text-danger" ng-bind="user.errors.LastName"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Email)}">
     <label>Email</label>
     <input class="form-control" type="email" ng-model="user.Email" name="Email" required/>
-    <p class="help-block" ng-show="invalidField(userForm.Email) && userForm.Email.$error.required">Email is required</p>
-    <p class="help-block" ng-show="invalidField(userForm.Email) && userForm.Email.$error.email">Email format is invalid</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Email) && userForm.Email.$error.required">Email is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Email) && userForm.Email.$error.email">Email format is invalid</p>
+    <p class="text-danger" ng-bind="user.errors.Email"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.CellPhone)}">
     <label>Cellphone</label>
     <input class="form-control" type="text" ng-model="user.CellPhone" name="CellPhone" required/>
-    <p class="help-block" ng-show="invalidField(userForm.CellPhone)">CellPhone is required</p>
+    <p class="help-block">Cellphone should be in E.164 format, for example: +16302303468</p>
+    <p class="text-danger" ng-show="invalidField(userForm.CellPhone)">CellPhone is required</p>
+    <p class="text-danger" ng-bind="user.errors.CellPhone"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Zip)}">
     <label>Zip</label>
     <input class="form-control" type="number" ng-model="user.Zip" name="Zip" required/>
-    <p class="help-block" ng-show="invalidField(userForm.Zip) && userForm.Zip.$error.required">Zip is required</p>
-    <p class="help-block" ng-show="invalidField(userForm.Zip) && userForm.Zip.$error.number">Zip should be a number</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Zip) && userForm.Zip.$error.required">Zip is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Zip) && userForm.Zip.$error.number">Zip should be a number</p>
+    <p class="text-danger" ng-bind="user.errors.Zip"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Dob)}">
     <label>Birthday</label>
-    <input class="form-control" type="text" ng-model="user.Dob" name="Dob" required/>
+    <input class="form-control" type="text" ng-model="user.Dob" name="Dob" required placeholder="YYYY-DD-MM"/>
     <p class="help-block">Date format YYYY-DD-MM, for example 1990-10-03</p>
-    <p class="help-block" ng-show="invalidField(userForm.Dob)">Birthday is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Dob)">Birthday is required</p>
+    <p class="text-danger" ng-bind="user.errors.Dob"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Password)}">
     <label>Password</label>
     <input class="form-control" type="password" ng-model="user.Password" name="Password" required/>
-    <p class="help-block" ng-show="invalidField(userForm.Password)">First Name is required</p>
+    <p class="text-danger" ng-show="invalidField(userForm.Password)">First Name is required</p>
+    <p class="text-danger" ng-bind="user.errors.Password"></p>
   </div>
 
   <div class="form-group"">
     <button type="button" class="btn btn-primary" ng-click="registerUser()">Register</button>
-    <p class="help-block" ng-show="!userForm.$vaild">Check form for required fields and errors</p>
+    <p class="text-danger" ng-show="!userForm.$vaild">Check form for required fields and errors</p>
   </div>
 </form>

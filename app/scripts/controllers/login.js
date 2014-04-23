@@ -9,11 +9,22 @@ angular.module('mdoauthApp')
     ];
 
     $scope.authUser = function(){
+      $scope.user.errors = {}
+
       //$http.post("http://54.187.121.231:3000/v1/login", $scope.user, {}
       //).success(function(data, status, headers, config) {
       // render success message and redirect back
       //}).error(function(data, status, headers, config) {
-      //  parse messages and add errors to form
+        var errors = {};
+        data.forEach(function(el, index, array){
+          if (errors[el["Field"]]){
+            errors[el["Field"]] += ". " + el['Tmpl'];
+          } else {
+            errors[el["Field"]] = el['Tmpl'];
+          };
+        });
+
+        $scope.user.errors = errors;
       //});
     }
 
