@@ -28,11 +28,26 @@ mdoauthApp.config(function ($routeProvider) {
   });
 
 mdoauthApp.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+   $httpProvider.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
   }
 ]);
 
 mdoauthApp.factory('invalidField', [function(field){
-  return function(field){ return (field.$dirty && field.$invalid)};
+  return function(field){
+    return (field.$dirty && field.$invalid)};
+}]);
+
+mdoauthApp.factory('parseFormErrors', [function(data){
+  return function(data) {
+    var errors = {};
+    data.forEach(function (el, index, array) {
+      if (errors[el["Field"]]) {
+        errors[el["Field"]] += ". " + el['Tmpl'];
+      } else {
+        errors[el["Field"]] = el['Tmpl'];
+      }
+    });
+
+    return errors;
+  }
 }]);

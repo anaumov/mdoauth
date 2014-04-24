@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mdoauthApp')
-  .controller('RegistrationController', function ($scope, $http, invalidField) {
+  .controller('RegistrationController', function ($scope, $http, invalidField, parseFormErrors) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -9,26 +9,24 @@ angular.module('mdoauthApp')
     ];
 
 
-    $scope.registerUser = function(){
+    $scope.registerUser = function() {
       $scope.user.errors = {};
 
-      //$http.post("http://54.187.121.231:3000/v1/registration", $scope.user, {}
-      //).success(function(data, status, headers, config) {
-        // render success message and redirect back
-      //}).error(function(data, status, headers, config) {
-        var errors = {};
-        data.forEach(function(el, index, array){
-          if (errors[el["Field"]]){
-            errors[el["Field"]] += ". " + el['Tmpl'];
-          } else {
-            errors[el["Field"]] = el['Tmpl'];
-          };
-        });
-
-        $scope.user.errors = errors;
-      //});
-
-    $scope.invalidField = function(field){
-      return invalidField(field);
+      $http({
+        method: "POST",
+        url: "http://54.187.121.231:3000/v1/registration",
+        data: $scope.user,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).success(function(data, status, headers, config) {
+        console.log(data);
+      }).error(function(data, status, headers, config) {
+        if (status == 401) {
+          $scope.user.errors.general = data;
+        } else {
+          $scope.user.errors = parseFormErrors(data);
+        }
+      });
     }
-  });
+
+    $scope.invalidField = function(field){invalidField(field)};
+  })

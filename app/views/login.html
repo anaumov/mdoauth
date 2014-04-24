@@ -1,21 +1,21 @@
 <h3>Registration form.</h3>
 <form ng-controller="LoginController" name="userForm">
-  <p ng-model="user.errors.general"></p>
+  <p ng-bind="user.errors.general"></p>
 
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Login)}">
     <label>Login</label>
     <input class="form-control" type="text" ng-model="user.Login" name="Login" required placeholder="Cellphone or email"/>
     <p class="text-danger" ng-show="invalidField(userForm.Login)">Login is required</p>
-    <p class="text-danger" ng-bind="user.errors.Zip"></p>
+    <p class="text-danger" ng-bind="user.errors.Login"></p>
   </div>
   <div class="form-group" ng-class="{'has-warning': invalidField(userForm.Password)}">
     <label>Password</label>
     <input class="form-control" type="password" ng-model="user.Password" name="Password" required/>
-    <p class="text-danger" ng-show="invalidField(userForm.Password)">First Name is required</p>
-    <p class="text-danger" ng-bind="user.errors.Zip"></p>
+    <p class="text-danger" ng-show="invalidField(userForm.Password)">Password is required</p>
+    <p class="text-danger" ng-bind="user.errors.Password"></p>
   </div>
 
-  <div class="form-group"">
+  <div class="form-group">
   <button type="button" class="btn btn-primary" ng-click="authUser()">Register</button>
   <p class="text-danger" ng-show="!userForm.$vaild">Check form for required fields and errors</p>
   </div>
